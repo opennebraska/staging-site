@@ -1,0 +1,8 @@
+---
+layout: nil
+---
+{
+    "results": [{% for post in site.posts %}
+        {"title":"{{ post.title }}", "url":"{{ site.production_url }}{{ post.url }}", "text":"{{ post.content | strip_html | strip_newlines }}"}{% if forloop.rindex0 > 0 %}, {% endif %}{% endfor %}
+    ]
+}

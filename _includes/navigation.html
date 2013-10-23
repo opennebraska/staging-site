@@ -1,0 +1,38 @@
+    <!-- BEGIN desktop navigation -->
+    <nav id="desktop-nav" class="uk-navbar uk-navbar-attached">
+      <div class="uk-container uk-container-center">
+        <a href="#mobile-nav" class="uk-navbar-toggle uk-visible-small" data-uk-offcanvas></a>
+        <a class="uk-navbar-brand" href="/">OpenNebraska</a>
+        <ul class="uk-navbar-nav uk-hidden-small">
+          <li><a href="/about.html">About</a></li>
+          <!--<li><a href="/blog.html">Blog</a></li>-->
+        </ul>
+
+        <div class="uk-navbar-flip">
+          <div class="uk-navbar-content uk-hidden-small">
+            <form class="uk-search" data-uk-search="{source:'/posts.json'}">
+              <input class="uk-search-field" type="search" placeholder="Search...">
+              <button class="uk-search-close" type="reset"></button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- END desktop navigation -->
+
+    <!-- BEGIN mobile navigation -->
+    <div id="mobile-nav" class="uk-offcanvas">
+      <div class="uk-offcanvas-bar">
+        <ul class="uk-nav uk-nav-offcanvas" data-uk-nav>
+          <li><a class="uk-text-large" href="/">OpenNebraska</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="blog.html">Blog</a></li>
+        </ul>
+        <form class="uk-search" data-uk-search="{source:'/posts.json'}">
+          <input class="uk-search-field" type="search" placeholder="Search...">
+          <button class="uk-search-close" type="reset"></button>
+        </form>
+      </div>
+    </div>
+    <!-- END mobile navigation -->
+

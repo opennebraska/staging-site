@@ -1,1 +1,39 @@
-box: wercker/default
+box: wercker/ruby
+build:
+  steps:
+    # Install dependencies
+    - bundle-install
+
+    # Execute jeykyll doctor command to validate the 
+    # site against a list of known issues.
+    - script:
+        name: jekyll doctor
+        code: bundle exec jekyll doctor
+
+    # Build some html
+    - script:
+        name: generate production site
+        code: |-
+          bundle exec jekyll build --trace
+
+    # Copy to the output folder
+    - script:
+        name: copy output
+        code: |-
+          rsync -avz "$WERCKER_SOURCE_DIR/" "$WERCKER_OUTPUT_DIR"
+
+deploy:
+  steps:
+   - mktemp:
+      envvar: PRIVATEKEY_PATH
+   - create-file:
+      name: write key
+      filename: $PRIVATEKEY_PATH
+      content: $SSH_PRIVATE
+      overwrite: true
+   - script:
+      name: transfer files
+      code: |
+        pwd
+        ls -la
+        rsync -avz --delete --rsh="ssh -i $PRIVATEKEY_PATH -o StrictHostKeyChecking=no -o UserKnownHostsFile=no" _site opennebraska-deploy@willow.prefork.net:site

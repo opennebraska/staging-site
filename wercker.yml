@@ -31,9 +31,10 @@ deploy:
       filename: $PRIVATEKEY_PATH
       content: $SSH_PRIVATE
       overwrite: true
+      hide-from-log: true
    - script:
       name: transfer files
       code: |
         pwd
         ls -la
-        rsync -avz --delete --rsh="ssh -i $PRIVATEKEY_PATH -o StrictHostKeyChecking=no -o UserKnownHostsFile=no" _site opennebraska-deploy@willow.prefork.net:site
+        rsync -avz --delete --rsh="ssh -i $PRIVATEKEY_PATH -o StrictHostKeyChecking=no -o UserKnownHostsFile=no" _site/ opennebraska-deploy@willow.prefork.net:site/
